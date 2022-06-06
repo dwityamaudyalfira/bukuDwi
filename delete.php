@@ -10,6 +10,7 @@ $isbn = $_POST['isbn'];
 $query = "DELETE from buku WHERE isbn = {$isbn}";
 $statement = $connection->query($query);
 $statement->setFetchMode(PDO::FETCH_ASSOC);
+
 //jalankan query
 $results = $statement->fetchAll();
 //output JSON
