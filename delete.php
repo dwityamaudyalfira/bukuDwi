@@ -1,18 +1,13 @@
 <?php
-
-include '../koneksi.php';
+require_once('koneksi.php');
+// untuk hapus data buku berdasarkan isbn
+$isbn = $_GET['isbn'];
+$sql = "DELETE FROM buku WHERE isbn= ?";
 /**
  * @var $connection PDO
  */
-//Prepare query
-$isbn = $_POST['isbn'];
+$row = $connection->prepare($sql);
+$row->execute(array($isbn));
 
-$query = "DELETE from buku WHERE isbn = {$isbn}";
-$statement = $connection->query($query);
-$statement->setFetchMode(PDO::FETCH_ASSOC);
-
-//jalankan query
-$results = $statement->fetchAll();
-//output JSON
-header('Content-Type: application/json');
-echo json_encode($results);
+echo '<script>alert("Berhasil Hapus Data");window.location="all.php"</script>';
+?>
